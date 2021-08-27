@@ -3,29 +3,32 @@
   <head>
     <title>Scissors Paper Stone</title>
   </head>
+
   <body>
     <script>
       function computerPlay() {
         let choice = Math.floor(Math.random() * 3);
+        let result;
 
         if (choice === 1) {
-          let result = "rock";
-           console.log("Computer: " + result);
-           return result;
+          result = "rock";
+          console.log("Computer: " + result);
+          return result;
         } else if (choice === 2) {
-            let result = "paper";
-           console.log("Computer: " + result);
-           return result;
+          result = "paper";
+          console.log("Computer: " + result);
+          return result;
         } else {
-            let result = "scissors";
-           console.log("Computer: " + result);
-           return result;
+          result = "scissors";
+          console.log("Computer: " + result);
+          return result;
         }
       }
-      //test if vscode is connected to git 
+
       function playRound(playerSelection, computerSelection) {
-        let playerChoiceString = playerSelection.toString();
-        let playerChoice = playerChoiceString.toLowerCase();
+        let playerChoice = playerSelection;
+        //let playerChoiceString = playerSelection.toString();
+        //let playerChoice = playerChoiceString.toLowerCase();
         console.log(playerChoice);
 
         let computerChoice = computerSelection;
@@ -34,26 +37,65 @@
         //console.log(computerChoice);
 
         if (playerChoice === "rock" && computerChoice === "paper") {
-          return console.log("You lost! Paper beats rock.");
+          console.log("You lost! Paper beats rock.");
+          return "L";
         } else if (playerChoice === "paper" && computerChoice === "scissors") {
-          return console.log("You lost! Scissors beats paper.");
+          console.log("You lost! Scissors beats paper.");
+          return "L";
         } else if (playerChoice === "scissors" && computerChoice === "rock") {
-          return console.log("You lost! Rock beats scissors.");
+          console.log("You lost! Rock beats scissors.");
+          return "L";
         } else if (playerChoice === "paper" && computerChoice === "rock") {
-          return console.log("You won! Paper beats rock.");
+          console.log("You won! Paper beats rock.");
+          return "W";
         } else if (playerChoice === "rock" && computerChoice === "scissors") {
-          return console.log("You won! Rock beats scissors");
+          console.log("You won! Rock beats scissors");
+          return "W";
         } else if (playerChoice === "scissors" && computerChoice === "paper") {
-          return console.log("You won! Scissors beats paper!");
+          console.log("You won! Scissors beats paper!");
+          return "W";
+        } else if (playerChoice === null) {
+          console.log("You did not enter anything.");
+        //} else if (playerChoice !== "scissors" || playerChoice !== "paper" || ///playerChoice !== "rock") {
+          console.log("you did not enter a valid input");
         } else {
-          return console.log("You drew.");
+          console.log("you drew");
+          return "D";
         }
       }
 
-      const playerSelection = "rock";
-      const computerSelection = computerPlay();
+      //const playerSelection = "rock";
+      //let computerSelection = computerPlay();
 
-      console.log(playRound(playerSelection, computerSelection));
+      // console.log(playRound(playerSelection, computerSelection));
+
+      function game() {
+        let playerWins = 0;
+        let computerWins = 0;
+        let playerDraws = 0;
+
+        for (i = 0; i < 5; i++) {
+          let playerSelection = window.prompt("What do you play?");
+          let result = playRound(playerSelection, computerPlay());
+
+          if (result === "W") {
+            playerWins++;
+          } else if (result === "L") {
+            computerWins++;
+          } else if (result === "D") {
+            playerDraws++;
+          }
+          console.log("Wins: " + playerWins, "Draws: " + playerDraws, "Losses: "+ computerWins );
+        }
+        if (playerWins > computerWins) {
+          alert("you won bro");
+        } else if (computerWins > playerWins) {
+          alert("you lost bro");
+        } else {
+          alert("you drew bro");
+        }
+      }
+      game();
     </script>
   </body>
 </html>
